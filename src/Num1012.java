@@ -5,6 +5,7 @@ public class Num1012 {
     private static int rowSize;
     private static int colSize;
     private static int cabageCount;
+
     private static int map [][];
     private final static int VISITED = 2;
     private final static int UNVISITED = 1;
@@ -14,6 +15,8 @@ public class Num1012 {
     private final static int RIGHT = 1;
     private final static int BOTTOM = 2;
     private final static int LEFT = 3;
+
+    private static int  warmCount;
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
@@ -28,15 +31,17 @@ public class Num1012 {
                 map[scanner.nextInt()][scanner.nextInt()] = 1;
             }
             dfsAll();
-
+            System.out.println(warmCount);
         }
     }
 
     private static void dfsAll(){
         for(int i = 0; i < colSize; i++){
             for(int j = 0; j < rowSize; j++){
-                if(map[i][j] == UNVISITED)
+                if(map[i][j] == UNVISITED) {
                     dfs(i, j);
+                    warmCount++;
+                }
             }
         }
     }
