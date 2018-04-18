@@ -36,6 +36,7 @@ public class Num1012 {
             dfsAll(i);
         }
         scanner.close();
+//4. 정답 출력
         for(int i = 0; i < caseCount; i++){
             System.out.println(warmCount[i]);
         }
@@ -45,7 +46,7 @@ public class Num1012 {
         for(int i = 0; i < colSize; i++){
             for(int j = 0; j < rowSize; j++){
                 if(map[i][j] == UNVISITED) {
-//4. dfs는 connected Component 단위로 돌아가게 되어있음
+//5. dfs는 connected Component 단위로 돌아가게 되어있음
                     dfs(i, j);
                     warmCount[nth]++;
                 }
@@ -54,10 +55,10 @@ public class Num1012 {
     }
     //-1 colSize, rowSize 이면 indexOver
     private static void dfs(int hereI, int hereJ){
-//5. 방문하자마자 visited로 표시
+//6. 방문하자마자 visited로 표시
         map[hereI][hereJ] = VISITED;
         for(int i = 0; i < 4; i++){
-//6. 방문하자마자 인접한 네 방향에 대해서 방문할 수 있는 지 조건을 따져봄
+//7. 방문하자마자 인접한 네 방향에 대해서 방문할 수 있는 지 조건을 따져봄
             if(i == TOP && hereI-1 != -1 && map[hereI-1][hereJ] == UNVISITED){ //위 쪽 인덱스 참조 가능하며 방문 안 해본 배추가 있으면
                 dfs(hereI-1, hereJ);
             }else if(i == RIGHT && hereJ+1 != rowSize && map[hereI][hereJ+1] == UNVISITED){
