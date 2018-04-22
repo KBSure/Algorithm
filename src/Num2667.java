@@ -15,13 +15,12 @@ public class Num2667 {
     private final static int BOTTOM = 2;
     private final static int LEFT = 3;
 
-    private static ArrayList<Integer> houseCountList;
+    private static ArrayList<Integer> houseCountList = new ArrayList<>();
 
     public static void main(String[] args) {
         // 입력 받아 배열로 맵 만들기
         // dfs로 단지 찾기
         // 집의 수가 작은 순서대로 출력하기
-
 
         // 입력 받아 배열로 맵 만들기
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -44,26 +43,31 @@ public class Num2667 {
             e.printStackTrace();
         }
 
-        //dfsAll 호출
+        // dfs로 단지 찾기
+        // dfsAll 호출
         int townCount = dfsAll();
+
+        // 집의 수가 작은 순서대로 출력하기
         Collections.sort(houseCountList);
         System.out.println(townCount);
-        for(int i = 1; i < townCount; i++) {
+        for(int i = 0; i < townCount; i++) {
             System.out.println(houseCountList.get(i));
         }
     }
 
     private static int dfsAll(){
-        int townIdx = 0;
+        int townIdx = -1;
         for(int i = 0; i < N; i++){
             for(int j = 0; j < N; j++){
                 if(map[i][j] == UNVISITED) { // 방문하지 않은 집
                     houseCountList.add(0);
-                    dfs(i, j, ++townIdx);
+                    townIdx++;
+                    dfs(i, j, townIdx);
                 }
             }
         }
-        return townIdx;
+        int townCount = townIdx + 1;
+        return townCount;
     }
 
     private static void dfs(int hereI, int hereJ, int townIdx){
