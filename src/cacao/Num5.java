@@ -1,4 +1,4 @@
-package Cacao;
+package cacao;
 
 import java.io.BufferedReader;
 import java.io.IOException;

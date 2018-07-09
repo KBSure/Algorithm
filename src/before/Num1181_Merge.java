@@ -1,3 +1,5 @@
+package before;
+
 import java.util.Scanner;
 
 public class Num1181_Merge {

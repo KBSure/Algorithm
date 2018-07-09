@@ -1,4 +1,4 @@
-package Cacao;
+package cacao;
 
 import org.junit.Test;
 import org.thymeleaf.util.StringUtils;
