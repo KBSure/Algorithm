@@ -3,7 +3,6 @@ package study.acmicpc;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.nio.Buffer;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -39,7 +38,7 @@ public class Num1707 {
                 return false;
             }
 
-            if (!dfs(there, marking[there]))
+            if (visited[there] && !dfs(there, marking[there]))
                 return false;
         }
         return true;
@@ -66,6 +65,7 @@ public class Num1707 {
 
             adj[v1].add(v2);
             adj[v2].add(v1);
+            System.out.println();
         }
 
         visited = new boolean[numV+1];
