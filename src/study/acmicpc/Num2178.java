@@ -38,7 +38,7 @@ public class Num2178 {
 
         Q[0].add(startI);
         Q[1].add(startJ);
-        distance[startI][startJ] = 0;
+        distance[startI][startJ] = 1;
 
         while(!Q[0].isEmpty()){
             Integer hereI = Q[0].poll();
@@ -54,7 +54,7 @@ public class Num2178 {
             int thereJ;
             thereI = hereI-1;
             thereJ = hereJ;
-            if(thereI != -1 && !discovered[thereI][thereJ]) {
+            if(thereI != -1 && map[thereI][thereJ] == 1 && !discovered[thereI][thereJ]) {
                 discovered[thereI][thereJ] = true;
                 Q[0].add(thereI);
                 Q[1].add(thereJ);
@@ -62,7 +62,7 @@ public class Num2178 {
             }
             thereI = hereI;
             thereJ = hereJ+1;
-            if(thereJ != N && !discovered[thereI][thereJ]) {
+            if(thereJ != M && map[thereI][thereJ] == 1 && !discovered[thereI][thereJ]) {
                 discovered[thereI][thereJ] = true;
                 Q[0].offer(thereI);
                 Q[1].offer(thereJ);
@@ -70,7 +70,7 @@ public class Num2178 {
             }
             thereI = hereI + 1;
             thereJ = hereJ;
-            if(thereI != N && !discovered[thereI][thereJ]) {
+            if(thereI != N && map[thereI][thereJ] == 1 && !discovered[thereI][thereJ]) {
                 discovered[thereI][thereJ] = true;
                 Q[0].offer(thereI);
                 Q[1].offer(thereJ);
@@ -78,7 +78,7 @@ public class Num2178 {
             }
             thereI = hereI;
             thereJ = hereJ - 1;
-            if(thereJ != -1 && !discovered[thereI][thereJ]) {
+            if(thereJ != -1 && map[thereI][thereJ] == 1 && !discovered[thereI][thereJ]) {
                 discovered[thereI][thereJ] = true;
                 Q[0].offer(thereI);
                 Q[1].offer(thereJ);
@@ -86,5 +86,6 @@ public class Num2178 {
             }
 
         }
+        System.exit(0);
     }
 }
