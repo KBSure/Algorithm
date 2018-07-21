@@ -6,6 +6,8 @@ import java.io.InputStreamReader;
 import java.util.LinkedList;
 import java.util.Queue;
 
+//반복문 돌려서 메서드 호출 할 때 초기화 해줘야 하는 자료구조가 있는지 확인!
+//
 public class Num2206 {
 
     private static int[][] map;
@@ -15,27 +17,24 @@ public class Num2206 {
     private static int M;
 
     public static void main(String[] args) throws IOException {
-        init();
-        int minDistance = -1;
-        for(int i = 0; i < N; i++){
-            for(int j = 0; j < M; j++){
-                if(map[i][j] == 0){
-                    map[i][j] = 1;
-                    int tempDistance = bfs();
-                    if(minDistance > tempDistance){
-                        minDistance = tempDistance;
-                    }
-                    map[i][j] = 0;
-                }
+        while(true) {
+            init();
+            int minDistance = 1000 * 1000;
+            int tempDistance = bfs(); //벽 안 뚫고 bfs
+            if (tempDistance != -1 && minDistance > tempDistance) {
+                minDistance = tempDistance;
             }
+
+            minDistance = bfsWithWallBreaking(minDistance);
+
+            System.out.println(minDistance != 1000 * 1000 ? minDistance : -1);
         }
-        System.out.println(minDistance);
     }
 
     private static int bfs(){
         //진입점
         queue.offer(new Cell(0,0));
-        distance[0][0] = 0;
+        distance[0][0] = 1;
 
         while(!queue.isEmpty()){
             Cell here = queue.poll();
@@ -43,13 +42,34 @@ public class Num2206 {
 
             for(int i = 0; i < 4; i++){
                 Cell there = here.adj(i);
-                if(map[there.i][there.j] == 0 && distance[there.i][there.j] == -1){
-                    queue.offer(there);
-                    distance[there.i][there.j] = distance[here.i][here.j] + 1;
+                if(there != null) {
+                    if (map[there.i][there.j] == 0 && distance[there.i][there.j] == -1) {
+                        queue.offer(there);
+                        distance[there.i][there.j] = distance[here.i][here.j] + 1;
+                    }
                 }
             }
         }
-        return 0;
+        return -1;
+    }
+
+    private static int bfsWithWallBreaking(int minDistance){
+        //초기화
+        int tempDistance = 0;
+        for(int i = 0; i < N; i++){ //벽 뚫고 bfs
+            for(int j = 0; j < M; j++){
+                if(map[i][j] == 1){
+                    initDistance();
+                    map[i][j] = 0;
+                    tempDistance = bfs();
+                    if(tempDistance != -1 && minDistance > tempDistance){
+                        minDistance = tempDistance;
+                    }
+                    map[i][j] = 1;
+                }
+            }
+        }
+        return minDistance;
     }
 
     private static void init() throws IOException {
@@ -67,14 +87,18 @@ public class Num2206 {
         }
 
         distance = new int[N][M]; //-1 초기화
+        initDistance();
+
+        queue = new LinkedList<>();
+
+    }
+
+    private static void initDistance(){
         for(int i = 0; i < N; i++){
             for(int j = 0; j < M; j++){
                 distance[i][j] = -1;
             }
         }
-
-        queue = new LinkedList<>();
-
     }
 
     private static class Cell {
@@ -90,7 +114,13 @@ public class Num2206 {
         }
 
         Cell adj(int dir){
-          return new Cell(i+DIR[0][dir],j+DIR[1][dir]);
+            int thereI = i+DIR[0][dir];
+            int thereJ = j+DIR[1][dir];
+            Cell there = null;
+            if(thereI != -1 && thereI != N && thereJ != -1 && thereJ != M) {
+                there = new Cell(thereI, thereJ);
+            }
+          return there;
         }
     }
 
