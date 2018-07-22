@@ -13,14 +13,9 @@ public class Num7576 {
     private static int M;
     private static int[][] map;
 
-//    private static boolean[][] discovered;
     private static List<Queue<Cell>> queueList;
 
     private static int countVisitable;
-
-    private static final int UNVISITABLE = -1;
-    private static final int VISITABLE = 0;
-    private static final int VISITED = 1;
 
     public static void main(String[] args) throws IOException {
         init();
@@ -51,31 +46,26 @@ public class Num7576 {
     private static int bfs(){
         //here 들어 가 있는 중
         int nowDistance = -1;
-        while(!isEmptyAllQueue()){
-            //here 꺼내서 검사한다
+            while(!isEmptyAllQueue()){
             nowDistance++;
-            for(Queue<Cell> queue : queueList){ //empty된 queue는 어떻게 되는지 사라지게 할까?
-                if(queue.isEmpty()) continue;
+            for(Queue<Cell> queue : queueList){
                 Cell here = queue.peek();
-                //특정 distance까지 다 queue에서 빼내서 queue에 넣기
-                if(here.distance == nowDistance){
+                while(here != null && here.distance == nowDistance){
                     queue.poll();
-                    //there 찾기
-                    for(int i = 0; i < 4; i++) {
+                    for (int i = 0; i < 4; i++) {
                         Cell there = here.adj(i);
-                        if(there != null){
-                            if(map[there.i][there.j] == 0){
+                        if (there != null) {
+                            if (map[there.i][there.j] == 0) {
                                 queue.offer(there);
                                 map[there.i][there.j] = 1;
                                 countVisitable--;
                             }
                         }
                     }
+                    here = queue.peek();
                 }
             }
         }
-        //while문은 모든 큐가 empty할 떄 까지
-        //발견하면 map을 1로 바꾼다.
         return countVisitable == 0 ? nowDistance : -1;
     }
 
@@ -111,7 +101,5 @@ public class Num7576 {
                 if(map[i][j] == 0) countVisitable++;
             }
         }
-
-
     }
 }
