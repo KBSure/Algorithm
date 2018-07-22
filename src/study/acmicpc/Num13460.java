@@ -68,7 +68,7 @@ public class Num13460 {
                     Ball thereBlue = hereBalls[BLUE].move(dir);
                     if(thereRed.i == thereBlue.i && thereRed.j == thereBlue.j && map[thereRed.i][thereRed.j] != HOLE){
                         thereBlue.i -= DIR[0][dir];
-                        thereBlue.j -= DIR[0][dir];
+                        thereBlue.j -= DIR[1][dir];
                     }
                     return new Ball[]{thereRed, thereBlue};
                 }else{
@@ -76,7 +76,7 @@ public class Num13460 {
                     Ball thereRed = hereBalls[RED].move(dir);
                     if(thereRed.i == thereBlue.i && thereRed.j == thereBlue.j && map[thereRed.i][thereRed.j] != HOLE){
                         thereRed.i -= DIR[0][dir];
-                        thereRed.j -= DIR[0][dir];
+                        thereRed.j -= DIR[1][dir];
                     }
                     return new Ball[]{thereRed, thereBlue};
                 }
@@ -86,7 +86,7 @@ public class Num13460 {
                     Ball thereBlue = hereBalls[BLUE].move(dir);
                     if(thereRed.i == thereBlue.i && thereRed.j == thereBlue.j && map[thereRed.i][thereRed.j] != HOLE){
                         thereBlue.i -= DIR[0][dir];
-                        thereBlue.j -= DIR[0][dir];
+                        thereBlue.j -= DIR[1][dir];
                     }
                     return new Ball[]{thereRed, thereBlue};
                 }else{
@@ -94,7 +94,7 @@ public class Num13460 {
                     Ball thereRed = hereBalls[RED].move(dir);
                     if(thereRed.i == thereBlue.i && thereRed.j == thereBlue.j && map[thereRed.i][thereRed.j] != HOLE){
                         thereRed.i -= DIR[0][dir];
-                        thereRed.j -= DIR[0][dir];
+                        thereRed.j -= DIR[1][dir];
                     }
                     return new Ball[]{thereRed, thereBlue};
                 }
@@ -104,7 +104,7 @@ public class Num13460 {
                     Ball thereBlue = hereBalls[BLUE].move(dir);
                     if(thereRed.i == thereBlue.i && thereRed.j == thereBlue.j && map[thereRed.i][thereRed.j] != HOLE){
                         thereBlue.i -= DIR[0][dir];
-                        thereBlue.j -= DIR[0][dir];
+                        thereBlue.j -= DIR[1][dir];
                     }
                     return new Ball[]{thereRed, thereBlue};
                 }else{
@@ -112,7 +112,7 @@ public class Num13460 {
                     Ball thereRed = hereBalls[RED].move(dir);
                     if(thereRed.i == thereBlue.i && thereRed.j == thereBlue.j && map[thereRed.i][thereRed.j] != HOLE){
                         thereRed.i -= DIR[0][dir];
-                        thereRed.j -= DIR[0][dir];
+                        thereRed.j -= DIR[1][dir];
                     }
                     return new Ball[]{thereRed, thereBlue};
                 }
@@ -122,7 +122,7 @@ public class Num13460 {
                     Ball thereBlue = hereBalls[BLUE].move(dir);
                     if(thereRed.i == thereBlue.i && thereRed.j == thereBlue.j && map[thereRed.i][thereRed.j] != HOLE){
                         thereBlue.i -= DIR[0][dir];
-                        thereBlue.j -= DIR[0][dir];
+                        thereBlue.j -= DIR[1][dir];
                     }
                     return new Ball[]{thereRed, thereBlue};
                 }else{
@@ -130,7 +130,7 @@ public class Num13460 {
                     Ball thereRed = hereBalls[RED].move(dir);
                     if(thereRed.i == thereBlue.i && thereRed.j == thereBlue.j && map[thereRed.i][thereRed.j] != HOLE){
                         thereRed.i -= DIR[0][dir];
-                        thereRed.j -= DIR[0][dir];
+                        thereRed.j -= DIR[1][dir];
                     }
                     return new Ball[]{thereRed, thereBlue};
                 }
