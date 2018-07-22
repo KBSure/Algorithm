@@ -45,6 +45,20 @@ public class Num13460 {
             Ball hereRed = hereBalls[RED]; //null이 생길 수 없다
             Ball hereBlue = hereBalls[BLUE];
 
+//            for(int i = 0; i < N; i++){
+//                for(int j = 0; j < M; j++){
+//                    if(hereRed.i == i && hereRed.j == j){
+//                        System.out.print(REDBALL);
+//                    }else if(hereBlue.i == i && hereBlue.j == j){
+//                        System.out.print(BLUEBALL);
+//                    }
+//                    else{
+//                        System.out.print(map[i][j]);
+//                    }
+//                }
+//                System.out.println();
+//            }
+
             if(map[hereRed.i][hereRed.j] == HOLE && map[hereBlue.i][hereBlue.j] != HOLE){ // 구멍 잘 들어갔으면
                 return hereRed.distance;
             }else if(map[hereRed.i][hereRed.j] == HOLE && map[hereBlue.i][hereBlue.j] == HOLE){
@@ -53,8 +67,12 @@ public class Num13460 {
 
             //사방으로 이동시키기
             for(int i = 0; i < 4; i++){
-                Ball[] thereBalls = moveBalls(hereBalls, i);
-                queue.offer(thereBalls);
+                //before랑 beforebefore가 dir 차이가 2가 나고 beforebefore랑 i랑 같으면 추가 안한다
+                //before랑 같으면 추가 안한다
+                if(hereRed.beforeDir != i && !(Math.abs(hereRed.beforeDir - hereRed.beforebeforeDir) == 2 && hereRed.beforebeforeDir == i)) {
+                    Ball[] thereBalls = moveBalls(hereBalls, i);
+                    queue.offer(thereBalls);
+                }
             }
         }
         return -1;
@@ -156,9 +174,11 @@ public class Num13460 {
             for (int j = 0; j < M; j++){
                 map[i][j] = row.charAt(j);
                 if(map[i][j] == 'R'){
-                    red = new Ball(i,j, 0);
+                    map[i][j] = '.';
+                    red = new Ball(i,j, 0, -1, -1);
                 }else if(map[i][j] == 'B'){
-                    blue = new Ball(i,j,0);
+                    map[i][j] = '.';
+                    blue = new Ball(i,j,0, -1,-1);
                 }
             }
         }
@@ -171,18 +191,22 @@ public class Num13460 {
         int i;
         int j;
         int distance;
+        int beforeDir;
+        int beforebeforeDir;
 
-        Ball(int i, int j, int distance){
+        Ball(int i, int j, int distance, int beforeDir, int beforebeforeDir){
             this.i = i;
             this.j = j;
             this.distance = distance;
+            this.beforeDir = beforeDir;
+            this.beforebeforeDir = beforebeforeDir;
         }
 
         Ball move(int dir) {
             //while문 돌면서 이동시킨다.
             int thereI = this.i;
             int thereJ = this.j;
-            Ball thereBall = new Ball(thereI, thereJ, this.distance + 1);
+            Ball thereBall = new Ball(thereI, thereJ, this.distance + 1, dir, this.beforeDir);
             while(true){
                 //up이라고 가정하고
                 thereI = thereI + DIR[0][dir];
