@@ -104,7 +104,7 @@ public class Num2206re {
                             }else if(!there.broken){
                                 discovered[there.i][there.j] = true;
                                 distance[there.i][there.j] = distance[here.i][here.j] + 1;
-                                map[there.i][there.j] = VISITABLE;
+//                                map[there.i][there.j] = VISITABLE;
                                 queue.offer(there);
                             }
                         }else if(map[there.i][there.j] == VISITABLE2){

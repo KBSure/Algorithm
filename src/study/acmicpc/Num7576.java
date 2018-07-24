@@ -27,7 +27,7 @@ public class Num7576 {
         int j;
         int distance; //distance가 기입되는 과정이 필요한 것이 아니라면, 별도의 자료구조에 기록해놓을 필요가 없다.
 
-        final int[][] DIR = {{-1,0,1,0}, {0,1,0,-1}};
+        static final int[][] DIR = {{-1,0,1,0}, {0,1,0,-1}};
         Cell(int i, int j, int distance){
             this.i = i; this.j = j; this.distance = distance;
         }
