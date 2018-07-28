@@ -14,30 +14,26 @@ public class Num1182 {
 
     public static void main(String[] args) throws IOException {
         init();
-        findSubSet();
+        findSubSet(0);
         System.out.println(count);
     }
 
-    private static void findSubSet(){
-        int sum = 0; // S가 0인 경우 조심
+    private static void findSubSet(int currentSum){
         //인덱스 리스트 꺼내면서 합을 구한다. 합이 조건에 맞으면 count++
-        for (Integer index : indexList) {
-            sum += integerArray[index];
-        }
-        if(indexList.size() != 0 && sum == S){
+        if(indexList.size() != 0 && currentSum == S){
             count++;
         }
         //integerArray 끝까지 돌았는데 없었으면 return;
         int lastIndex = -1;
         if(indexList.size() != 0) {
             lastIndex = indexList.peekLast();
+            if(lastIndex == N-1) return;
         }
-        if(lastIndex == N-1) return;
 
         //인데스 리스트 마지막 걸 꺼내서 그 다음 인덱스를 기록한 뒤, for문 돌리면서 재귀 호출
         for(int i = lastIndex+1; i < N; i++){
             indexList.addLast(i);
-            findSubSet();
+            findSubSet(currentSum + integerArray[i]);
             indexList.removeLast();
         }
 
