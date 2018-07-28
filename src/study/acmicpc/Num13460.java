@@ -29,8 +29,8 @@ public class Num13460 {
     private final static int[][] DIR = {{-1,0,1,0}, {0,1,0,-1}};
 
     public static void main(String[] args) throws IOException {
-        init();
-        System.out.println(bfs());
+            init();
+            System.out.println(bfs());
     }
 
     private static int bfs(){
@@ -61,7 +61,7 @@ public class Num13460 {
 
             if(map[hereRed.i][hereRed.j] == HOLE && map[hereBlue.i][hereBlue.j] != HOLE){ // 구멍 잘 들어갔으면
                 return hereRed.distance;
-            }else if(map[hereRed.i][hereRed.j] == HOLE && map[hereBlue.i][hereBlue.j] == HOLE){
+            }else if(map[hereBlue.i][hereBlue.j] == HOLE){ //blue는 빠지면 안된다.
                 continue;
             }
 
