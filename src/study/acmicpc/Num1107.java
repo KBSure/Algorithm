@@ -13,13 +13,17 @@ public class Num1107 {
         int M = Integer.parseInt(br.readLine());
 
         List<Integer> buttonList = new ArrayList<>();
-
-        String[] brokenButtonsStringArray = br.readLine().split(" ");
         for(int i = 0; i <= 9; i++){
             buttonList.add(i);
         }
-        for(int i = 0; i < M; i++){
-            buttonList.remove((Integer)Integer.parseInt(brokenButtonsStringArray[i]));
+
+        if(M != 0){
+            String[] brokenButtonsStringArray;
+            brokenButtonsStringArray = br.readLine().split(" ");
+
+            for(int i = 0; i < M; i++){
+                buttonList.remove((Integer)Integer.parseInt(brokenButtonsStringArray[i]));
+            }
         }
 
         System.out.println(findButtonCount(buttonList, N));
@@ -32,19 +36,23 @@ public class Num1107 {
         int downNum = N;
         int upDownCount = 0;
 
-        if(N >=98 && N <=103) return specialAnswer(buttonList, N);
+        if(N >=98 && N <=103) return specialAnswer(N);
+        if(isMakeNum(buttonList, N)) return countPushButton(N);
+
         while(true){
-            upDownCount++;
+            upDownCount++; // 직접 만들 수 없지만 다른 숫자 만들고 채널로 100에서부터 센거랑 비교
+
             if(isMakeNum(buttonList, ++upNum)){
                 return upDownCount + countPushButton(upNum);
             }
-            if(isMakeNum(buttonList, --downNum)){
+            if(downNum != 0 && isMakeNum(buttonList, --downNum)){
                 return upDownCount + countPushButton(downNum);
             }
+            if(upNum == 100 || downNum == 100) return upDownCount;
         }
     }
 
-    private static int specialAnswer(List<Integer> buttonList, int N) {
+    private static int specialAnswer(int N) {
         if(N == 100) return 0;
         int upDownCount = 0;
         int upNum = N;
