@@ -19,9 +19,13 @@ public class Num1074 {
     }
 
     private static void z(int r, int c, int startI, int startJ, int size){
-        if(size == 1) {
-            count++;
-            if(startI == r && startJ == c) System.out.println(count);
+        if(size == 2) {
+            for(int i = startI; i < startI+size; i++){
+                for(int j = startJ; j < startJ+size; j++){
+                    count++;
+                    if(i == r && j == c) System.out.println(count);
+                }
+            }
             return;
         }
 
