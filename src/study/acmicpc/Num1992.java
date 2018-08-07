@@ -11,7 +11,7 @@ public class Num1992 {
         init();
         System.out.println(compression(0,0,N));
     }
-    private static String compression(int startIndexI, int startIndexJ, int loofSize){
+    public static String compression(int startIndexI, int startIndexJ, int loofSize){
         switch (numOfThisArea(startIndexI, startIndexJ, loofSize)){
             default:
                 return "";
@@ -35,7 +35,7 @@ public class Num1992 {
             for(int j = startIndexJ; j < startIndexJ+loofSize-1; j++){
                 if(map[i][j] != map[i][j+1]) return -1;
             }
-            if(i < loofSize-1 && map[i][startIndexJ] != map[i+1][startIndexJ]) return -1;
+            if(i < startIndexI + loofSize-1 && map[i][startIndexJ] != map[i+1][startIndexJ]) return -1;
         }
         return map[startIndexI][startIndexJ];
     }
