@@ -1,4 +1,4 @@
-package before;
+package study.acmicpc;
 
 import java.util.Scanner;
 
