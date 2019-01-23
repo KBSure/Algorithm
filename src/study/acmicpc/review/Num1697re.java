@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.LinkedList;
 import java.util.Queue;
-
+//숨바꼭질
 public class Num1697re {
     private static int K;
     private static int N;
