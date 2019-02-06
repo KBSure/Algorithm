@@ -1,4 +1,4 @@
-package study.acmicpc.review;
+package study.acmicpc.review; //암호코드
 
 import java.io.BufferedReader;
 import java.io.IOException;
