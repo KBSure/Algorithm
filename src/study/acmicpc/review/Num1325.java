@@ -4,41 +4,37 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 
 public class Num1325 {
     private static int N, M;
     private static List<Integer>[] adj;
-    private static List<Integer> answerList;
+    private static int[] answerArray;
 
     public static void main(String[] args) throws IOException {
         init();
         int maxHackingCount = 1;
         for(int i = 1; i <= N; i++){
-            int currentHackingCount = dfs(i, new boolean[N+1]);
-            if(maxHackingCount < currentHackingCount){
-                maxHackingCount = currentHackingCount;
-                answerList.clear();
-                answerList.add(i);
-            }else if(maxHackingCount == currentHackingCount) answerList.add(i);
+            dfs(i, new boolean[N+1]);
         }
+
+        for(int i = 1; i < answerArray.length; i++){
+            if(maxHackingCount < answerArray[i]) maxHackingCount = answerArray[i];
+        }
+
         StringBuilder sb = new StringBuilder();
-        sb.append(answerList.get(0));
-        for(int i = 1; i < answerList.size(); i++){
-            sb.append(" " + answerList.get(i));
+        for(int i = 1; i <= N; i++){
+            if(answerArray[i] == maxHackingCount) sb.append(i + " ");
         }
-        System.out.println(sb.toString());
+        System.out.println(sb.toString().trim());
     }
 
-    private static int dfs(int currentComputer, boolean[] visited) {
-        if(visited[currentComputer]) return 0;
+    private static void dfs(int currentComputer, boolean[] visited) {
         visited[currentComputer] = true;
-        int ret = 0;
+        answerArray[currentComputer]++;
         for(Integer adjComputer : adj[currentComputer]){
-            ret += dfs(adjComputer, visited);
+            if(!visited[adjComputer]) dfs(adjComputer, visited);
         }
-        return ret + 1;
     }
 
     private static void init() throws IOException {
@@ -54,8 +50,8 @@ public class Num1325 {
             String[] line = br.readLine().split(" ");
             int A = Integer.parseInt(line[0]);
             int B = Integer.parseInt(line[1]);
-            adj[B].add(A);
+            adj[A].add(B);
         }
-        answerList = new LinkedList<>();
+        answerArray = new int[N+1];
     }
 }
