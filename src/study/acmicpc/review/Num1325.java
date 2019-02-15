@@ -10,33 +10,35 @@ import java.util.List;
 public class Num1325 {
     private static int N, M;
     private static List<Integer>[] adj;
-    private static int[] distance;
     private static List<Integer> answerList;
 
     public static void main(String[] args) throws IOException {
         init();
         int maxHackingCount = 1;
         for(int i = 1; i <= N; i++){
-            int currentHackingCount = dfs(i);
+            int currentHackingCount = dfs(i, new boolean[N+1]);
             if(maxHackingCount < currentHackingCount){
                 maxHackingCount = currentHackingCount;
                 answerList.clear();
                 answerList.add(i);
             }else if(maxHackingCount == currentHackingCount) answerList.add(i);
         }
-        System.out.print(answerList.get(0));
+        StringBuilder sb = new StringBuilder();
+        sb.append(answerList.get(0));
         for(int i = 1; i < answerList.size(); i++){
-            System.out.print(" " + answerList.get(i));
+            sb.append(" " + answerList.get(i));
         }
+        System.out.println(sb.toString());
     }
 
-    private static int dfs(int currentComputer) {
-        if(distance[currentComputer] != 0) return distance[currentComputer];
+    private static int dfs(int currentComputer, boolean[] visited) {
+        if(visited[currentComputer]) return 0;
+        visited[currentComputer] = true;
         int ret = 0;
         for(Integer adjComputer : adj[currentComputer]){
-            ret += Math.max(ret, dfs(adjComputer));
+            ret += dfs(adjComputer, visited);
         }
-        return distance[currentComputer] = ret + 1;
+        return ret + 1;
     }
 
     private static void init() throws IOException {
@@ -54,7 +56,6 @@ public class Num1325 {
             int B = Integer.parseInt(line[1]);
             adj[B].add(A);
         }
-        distance = new int[N+1];
         answerList = new LinkedList<>();
     }
 }
