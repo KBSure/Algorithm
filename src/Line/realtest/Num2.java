@@ -1,4 +1,4 @@
-package nhn.realtest;
+package Line.realtest;
 
 import java.io.BufferedReader;
 import java.io.IOException;
